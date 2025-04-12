@@ -178,11 +178,9 @@ def search():
 
             SSEs[i,j] = np.sum(np.square(yHat - happiness)) #obliczamy SSE dla każdej z tej pary
 
-    #zwracaja indes na którym byłoby indexy zwracane przez SSE(zfatowana tablica)
-    # gdyby znajdowały się w wabtlcy o wyamirach SSEs.shape, używamy tego bo aragmin automatycznie flattuje
-    #tablice i zwara index w "liście" wiec musimy go odsukać w tablicy o rozmairz SSEs.shape
+
     i, j = np.unravel_index(np.argmin(SSEs), SSEs.shape)
-    # np.argmin zwraca index najmniejszej wartości
+
     empIntercept, empSlope = intercepts[i], slopes[j]
 
     plt.figure(figsize=(6, 6))
@@ -221,18 +219,16 @@ def gowno():
             yHat = X @ np.array([inter, slp]).T  # oblicznamy przewidywania dla danych współczynników
             Rs[i, j] = np.corrcoef(np.array(happiness),yHat)[0,1]**2  # obliczamy SSE dla każdej z tej pary
 
-    # zwracaja indes na którym byłoby indexy zwracane przez SSE(zfatowana tablica)
-    # gdyby znajdowały się w wabtlcy o wyamirach SSEs.shape, używamy tego bo aragmin automatycznie flattuje
-    # tablice i zwara index w "liście" wiec musimy go odsukać w tablicy o rozmairz SSEs.shape
+
     i, j = np.unravel_index(np.argmin(Rs), Rs.shape)
-    # np.argmin zwraca index najmniejszej wartości
+
     empIntercept, empSlope = intercepts[i], slopes[j]
 
     plt.figure(figsize=(6, 6))
     plt.imshow(Rs, vmin=2000, vmax=3000,
-               # ustawiając vmin i vmax możemyu ustawić kolory i gdize zostanie narysowana heamata
+         
                extent=(slopes[0], slopes[-1], intercepts[0], intercepts[-1]),
-               # mapuje osie na warotści sloe i intercept
+
                origin='lower', aspect='auto', cmap='gray')
     plt.plot(empSlope, empIntercept, 'o', color=[1, .4, .4], markersize=12, label='Minimum z przeszukiwania\nsiatki')
     plt.plot(beta[1], beta[0], 'x', color=[.4, .7, 1], markeredgewidth=4, markersize=10,
