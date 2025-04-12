@@ -116,11 +116,7 @@ def wobbly_circle():
      #ax reprezentuje faktyczny wykres na którym będziemy rysować, w przypdaku większej ilości wykresów
      #ax będize tablicą
 
-     plth, = ax.plot(points[0,:], points[1,:], 'ko') #plt pełni tutaj rolę uchywtu dla punktów ax, czyli zapisuje gotowy wykres,
-                                                 #przez co chcąc coś na nim ryzować będziemy modywfikwać zmienna plt zmieniać punkty na gotowym uchywcie,
-                                                 # a nie rysować wykres od zera, bo punkty będą prztymane przez plth
-                                                 #plth[0] dlatego że obiekt ten zawiera uchywyty dla wszystkich
-                                                  # wykresów ax, w nasym przyadku jest to jednoelementowa lista(bo 1 wykres)
+     plth, = ax.plot(points[0,:], points[1,:], 'ko')
 
      phi = np.linspace(-1, 1-1/40, 40) **2
      ax.set_aspect('equal')
@@ -194,9 +190,7 @@ def manual_smoothing():
 
      kernelN = 7
      Y,X = np.meshgrid(np.linspace(-3,3, kernelN), np.linspace(-3,3, kernelN))
-     #Funcja meshgrid zwraca 2 obiekty( jeżeli 2 są przekazane), pierwszy obiekt zawiera wiele kopi pierwszego parametru
-     #ułożone jedna na drugiej( wiersz po wierszu), a drugi kopie drugiego paramatru jedna obok drugiej (kolumna po kolumnie)
-     #wymiary tych dwóch obiektów są takie jak wymiary argumentów dołącoznych do funckji
+
 
      kernel = np.exp( -(X**2+Y**2)/7 )
      kernel /= np.sum(kernel)
